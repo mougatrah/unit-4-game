@@ -1,0 +1,11 @@
+body{
+    display: flex;
+    
+  }
+  
+  .character {
+    border: solid black;
+    background-color: grey;
+    height: 100px;
+    width: 150px;
+  }
