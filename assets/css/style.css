@@ -1,4 +1,26 @@
+body{
+  display: block;
+  line-height: 1pt;
+  width: 60%;
+}
+
+#topRow{
+  display:flex;
+}
+
+#enemyRow{
+  display: flex;
+}
+
+h1{
+  display:block;
+  width: 100vw;
+  font-size: 24pt;
+  line-height: 2rem;
+}
+
 img{
+  display: block;
   width: 175px;
   height: auto;
   margin: 10px;
@@ -6,19 +28,13 @@ img{
 
   .character {
     text-align: center;
-    float: left;
     border: solid black;
     background-color: grey;
     height: 150px;
     width: 200px;
   }
+ 
 
-  .row{
-    width: 100vw;
-    height: 100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 
   #attack{
     display: block;

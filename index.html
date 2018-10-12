@@ -7,8 +7,8 @@
 
     
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css"/>
+
     <title>Star Wars RPG</title>
 
   </head>
@@ -17,22 +17,30 @@
     
     
     
-    <div id="0" class="character"><p>Luke Skywalker</p><img src="./images/luke.jpeg"/><p>HP: <span id="0hp"></span></p></div>
-    <div id="1" class="character"><p>Obi-Wan Kenobi</p><img src="./images/obiwan.jpg"/><p>HP: <span id="1hp"></span></p></div>
-    <div id="2" class="character"><p>Darth Maul</p><img src="./images/maul.jpeg"/><p>HP: <span id="2hp"></span></p></div>
-    <div id="3" class="character"><p>Darth Sidious</p><img src="./images/sid.jpeg"/><p>HP: <span id="3hp"></span></p></div>
+    <div id="0" class="character"><p>Luke Skywalker</p><img src="./images/luke.jpeg"/><p><span id="0hp"></span></p></div>
+    <div id="1" class="character"><p>Obi-Wan Kenobi</p><img src="./images/obiwan.jpg"/><p><span id="1hp"></span></p></div>
+    <div id="2" class="character"><p>Darth Maul</p><img src="./images/maul.jpeg"/><p><span id="2hp"></span></p></div>
+    <div id="3" class="character"><p>Darth Sidious</p><img src="./images/sid.jpeg"/><p><span id="3hp"></span></p></div>
     
   </div>
   <br>
+  <h1>Your Character</h1>
   <div id="playerRow" class="row">
     
   </div>
   <br>
+  <h1>Enemies Available To Attack</h1>
   <div id="enemyRow" class="row"></div>
   <br>
+  <h1>Fight Section</h1>
+  
+  <button id="attack">Attack!</button>  
+  <h1>Defender</h1>
   <div id="defenderRow" class="row"></div>
   <br>
-  <button id="attack">Attack!</button>  
+  
+  
+  <p id="status">Select a character</p>
   <button id="reset">Reset!</button>
 
   <script src="./assets/javascript/game.js"></script>
