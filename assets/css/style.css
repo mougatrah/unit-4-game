@@ -1,4 +1,13 @@
+html{
+  background-image: url("../images/xwing.jpg");
+  background-size: 120vw;
+  background-repeat: no-repeat;
+}
+
 body{
+ 
+  height: 100%;
+  width: 100%;
   display: block;
   line-height: 1pt;
   width: 60%;
