@@ -1,8 +1,7 @@
 var game = {
-    state : {
-        player : null,
-        defender : null
-    },
+    player: null,
+    defender: null,
+
     characters : [{
         name : "Luke Skywalker", 
         defaultHp: 100,  
@@ -39,8 +38,8 @@ var game = {
 
     setup(){
 
-        game.state.player = null;
-        game.state.defender = null;
+        game.player = null;
+        game.defender = null;
 
         for(let dude in game.characters){
             $("#topRow").append(game.characters[dude].div.css("background-color", "gray"));
@@ -53,34 +52,35 @@ var game = {
     },
 
     setChar(){
-        if(game.state.player === null){
-            game.state.player = game.characters[this.id];
+        if(game.player === null){
+            game.player = game.characters[this.id];
             console.log("setting player as " + game.characters[this.id].name);
             $("#enemyRow").append($(".character").css("background-color", "red"));
             $("#playerRow").append($(this).css("background-color", "white"));
-        }else if(game.state.player != null && game.state.defender === null &&  game.characters[this.id] != game.state.player){
+        }else if(game.player != null && game.defender === null &&  game.characters[this.id] != game.player){
             console.log("setting defender as " + game.characters[this.id].name);
-            game.state.defender = game.characters[this.id];
+            game.defender = game.characters[this.id];
             $("#defenderRow").append(this);
         }
     },
 
     attack(){
-        if(game.state.player && game.state.defender){
-            console.log("You did " + game.state.player.attack +" damage.");
-            console.log(game.state.defender.name + " did " + game.state.defender.counter + " damage to you. ");
-            game.state.defender.hp -= game.state.player.attack;
-            game.state.player.hp -= game.state.defender.counter;
-            game.state.player.attack += game.state.player.counter;
-
-            game.state.player.hpText.text(game.state.player.hp);
-            game.state.defender.hpText.text(game.state.defender.hp);
-
-            if(game.state.defender.hp <= 0){
-                game.state.defender.div.hide();
-                game.state.defender = null;
+        if(game.player && game.defender){
+            console.log("You hit " + game.defender + game.player.attack +" damage.");
+            game.defender.hp -= game.player.attack;
+            if(game.defender.hp <= 0){
+                game.defender.div.hide();
+                game.defender = null;
             }
-            if(game.state.player.hp <= 0){
+
+            game.player.hp -= game.defender.counter;
+            game.player.attack += game.player.counter;
+
+            game.player.hpText.text(game.player.hp);
+            game.defender.hpText.text(game.defender.hp);
+
+            
+            if(game.player.hp <= 0){
                 game.setup();
             }
         }
