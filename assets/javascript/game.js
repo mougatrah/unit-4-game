@@ -4,6 +4,13 @@ var game = {
     over: false,
     wins: 0,
 
+    volume: 0.1,
+
+    audio: {
+        "bgm": $("#bgm")[0],
+        "sfx": [$("#sfx1")[0], $("#sfx2")[0], $("#sfx3")[0], $("#selectSFX")[0]],
+    },
+
     characters: [{
         name: "Luke Skywalker",
         defaultHp: 110,
@@ -38,12 +45,33 @@ var game = {
         hpText: $("#3hp")
     }],
 
+    playAudio(key, index) {
+        
+        if (key == "bgm") {
+          
+                game.audio["bgm"].volume = game.volume;
+                game.audio["bgm"].play();
+          
+           
+
+           
+        }else if(key == "sfx"){
+            if(game.audio[key][index] !== undefined){
+            game.audio[key][index].volume = game.volume;
+            game.audio[key][index].load();
+            game.audio[key][index].play();
+        }
+        }
+        
+    },
+
     setup() {
 
         game.player = null;
         game.defender = null;
         game.over = false;
         game.wins = 0;
+        game.playAudio("bgm", 0);
         $("#reset").hide();
         $("#status").text("Pick a character");
         for (let dude in game.characters) {
@@ -58,12 +86,18 @@ var game = {
 
     setChar() {
         if (game.player === null) {
+            
+            game.playAudio("sfx", 3);
             game.player = game.characters[this.id];
-            $("#status").text("setting player as " + game.characters[this.id].name +". Pick an enemy.");
+            
+
+            $("#status").text("setting player as " + game.characters[this.id].name + ". Pick an enemy.");
             $("#enemyRow").append($(".character").css("background-color", "red"));
             $("#playerRow").append($(this).css("background-color", "white").css("border", "solid green"));
         } else if (game.player != null && game.defender === null && game.characters[this.id] != game.player) {
             $("#status").text("setting defender as " + game.characters[this.id].name);
+            
+            game.playAudio("sfx", 3);
             game.defender = game.characters[this.id];
             $("#defenderRow").append($(this).css("background-color", "black").css("color", "white").css("border", "solid green"));
         }
@@ -71,15 +105,16 @@ var game = {
 
     attack() {
         if (game.player && game.defender && !game.over) {
+            game.playAudio("sfx", Math.floor(Math.random() * 3));
             $("#status").text("You hit " + game.defender.name + " for " + game.player.attack + " damage. " + game.defender.name + " hit you for " + game.defender.counter + " damage.");
             game.defender.hp -= game.player.attack;
             if (game.defender.hp <= 0) {
-                
+
                 $("#status").text(game.defender.name + " has died. Pick a new enemy.");
                 game.wins++;
                 game.defender.div.hide();
                 game.defender = null;
-                if(game.wins === 3){
+                if (game.wins === 3) {
                     game.over = true;
                     $("#reset").show();
                     $("#status").text("You WON! Click Reset to play again.");
@@ -100,7 +135,7 @@ var game = {
                     $("#status").text("You DIED. Click Reset to play again.");
                 }
             }
-        }else if(!game.over){
+        } else if (!game.over) {
             $("#status").text("No enemy here.")
         }
 
@@ -111,4 +146,17 @@ var game = {
 $(".character").on("click", game.setChar);
 $("#attack").on("click", game.attack);
 $("#reset").on("click", game.setup);
+document.onkeyup = function(event){
+    if(event.code.toLowerCase() === "space"){
+        if(game.volume > 0){
+            game.volume = 0;
+            
+            game.audio["bgm"].volume = game.volume;
+        }else if(game.volume == 0) {
+            game.volume = 0.1;
+            
+            game.audio["bgm"].volume = game.volume;
+        }
+    }
+} 
 game.setup();
