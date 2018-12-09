@@ -2,6 +2,8 @@
 
 # Star Wars RPG
 
+https://mougatrah.github.io/
+
 1. When the game starts, the player will choose a character by clicking on the fighter's picture. The player will fight as that character for the rest of the game.
 
 2. The player chooses an opponent by clicking on an enemy's picture.
